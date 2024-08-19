@@ -1,4 +1,10 @@
 import React from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 type Props = {};
 
@@ -38,6 +44,12 @@ const WorkspacePanelComponent = (props: Props) => {
   return (
     <div className="w-96 h-dvh p-3 bg-slate-100 border border-r-slate-200">
       <h2 className="font-semibold">#Workspaces</h2>
+      <Accordion type="single" collapsible>
+        <AccordionItem value="item-1">
+          <AccordionTrigger>a</AccordionTrigger>
+          <AccordionContent>a</AccordionContent>
+        </AccordionItem>
+      </Accordion>
       <ul>
         {workspacesData.map((workspace) => (
           <WorkspaceItem key={workspace.workspaceName} data={workspace} />
