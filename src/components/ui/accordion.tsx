@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { ChevronDown, FolderClosed, FolderOpen } from "lucide-react";
+import { ChevronDown, File, FolderClosed, FolderOpen } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -42,16 +42,19 @@ const AccordionTrigger = React.forwardRef<
 ));
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
+interface AccordionContentProps
+  extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content> {}
+
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+  AccordionContentProps
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    className="overflow-hidden pl-4 text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     {...props}
   >
-    <div className={cn("pb-4 pt-0", className)}>{children}</div>
+    <div className={cn("pb-4 pt-0 flex", className)}>{children}</div>
   </AccordionPrimitive.Content>
 ));
 

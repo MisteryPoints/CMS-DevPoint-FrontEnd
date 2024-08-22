@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { File } from "lucide-react";
 
 type Props = {};
 
@@ -19,7 +20,12 @@ const workspacesData: WorkSpaceItemsProps[] = [
           {
             type: "folder",
             name: "subfolder1",
-            items: [],
+            items: [
+              {
+                type: "file",
+                name: "file-example.json",
+              },
+            ],
           },
         ],
       },
@@ -44,12 +50,6 @@ const WorkspacePanelComponent = (props: Props) => {
   return (
     <div className="w-96 h-dvh p-3 bg-slate-100 border border-r-slate-200">
       <h2 className="font-semibold">#Workspaces</h2>
-      <Accordion type="single" collapsible>
-        <AccordionItem value="item-1">
-          <AccordionTrigger>a</AccordionTrigger>
-          <AccordionContent>a</AccordionContent>
-        </AccordionItem>
-      </Accordion>
       <ul>
         {workspacesData.map((workspace) => (
           <WorkspaceItem key={workspace.workspaceName} data={workspace} />
@@ -73,33 +73,33 @@ type WorkSpaceItems = {
 const WorkspaceItem = ({ data }: { data: WorkSpaceItemsProps }) => {
   return (
     <div>
-      <p className="text-slate-400">{data.workspaceName}</p>
-
-      <ul className="pl-4">
+      <p className="text-slate-600">{data.workspaceName}</p>
+      <Accordion type="multiple">
         {data.items.map((workspaceItem) => (
-          <li key={workspaceItem.name}>
-            {workspaceItem.type === "file" ? (
-              <p>{workspaceItem.name}</p>
-            ) : (
-              <WorkspaceItemFolder data={workspaceItem} />
-            )}
-          </li>
+          <WorkspaceItemFolder key={workspaceItem.name} data={workspaceItem} />
         ))}
-      </ul>
+      </Accordion>
     </div>
   );
 };
 
 const WorkspaceItemFolder = ({ data }: { data: WorkSpaceItems }) => {
-  if (data.type === "file") return data.name;
+  if (data.type === "file")
+    return (
+      <div className="flex">
+        <File /> {data.name}
+      </div>
+    );
   return (
     <div>
-      <p>{data.name}</p>
-      <ul className="pl-4">
-        {data.items?.map((item) => (
-          <WorkspaceItemFolder key={item.name} data={item} />
-        ))}
-      </ul>
+      <AccordionItem value={data.name}>
+        <AccordionTrigger>{data.name}</AccordionTrigger>
+        <AccordionContent>
+          {data.items?.map((item) => (
+            <WorkspaceItemFolder key={item.name} data={item} />
+          ))}
+        </AccordionContent>
+      </AccordionItem>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import WorkspacePanelComponent from "./helpers/workspace-panel";
 import EditorPanelComponents from "./helpers/editor-panel";
