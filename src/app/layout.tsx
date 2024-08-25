@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Libre_Franklin as FontAbr } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
+import "./globals.css"; 
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -28,7 +27,6 @@ export default function RootLayout({
           " min-h-screen bg-background antialiased "
         )}
       >
-        <Navbar />
         <main>{children}</main>
       </body>
     </html>
